@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_mvvm/constants/app_constants.dart';
 import 'package:movie_mvvm/constants/app_icons.dart';
+import 'package:movie_mvvm/service/init_getit.dart';
+import 'package:movie_mvvm/service/navigation_service.dart';
 import 'package:movie_mvvm/widgets/cached_image.dart';
 import 'package:movie_mvvm/widgets/movies/movie_card.dart';
 
@@ -15,7 +17,9 @@ class MoviesScreen extends StatelessWidget {
           title: const Text('Popular Movies'),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                getIt<NavigationService>().showSnackbar();
+              },
               icon: const Icon(AppIcons.favoriteRounded),
               color: Colors.red,
             ),

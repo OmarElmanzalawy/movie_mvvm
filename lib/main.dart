@@ -4,8 +4,11 @@ import 'package:movie_mvvm/screens/favorite_screen.dart';
 import 'package:movie_mvvm/screens/movie_details_screen.dart';
 import 'package:movie_mvvm/screens/movies_screen.dart';
 import 'package:movie_mvvm/screens/splash_screen.dart';
+import 'package:movie_mvvm/service/init_getit.dart';
+import 'package:movie_mvvm/service/navigation_service.dart';
 
 void main() {
+  setupLocator();
   runApp(const MainApp());
 }
 
@@ -15,10 +18,11 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
+      navigatorKey: getIt<NavigationService>().navigationKey,
       debugShowCheckedModeBanner: false,
       title: 'Movies App',
       theme: AppThemeData.lightTheme,
-      home: SplashScreen(),
+      home: const MoviesScreen(),
     );
   }
 }

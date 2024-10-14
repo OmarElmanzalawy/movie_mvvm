@@ -3,6 +3,7 @@ import 'package:movie_mvvm/constants/app_theme_data.dart';
 import 'package:movie_mvvm/screens/favorite_screen.dart';
 import 'package:movie_mvvm/screens/movie_details_screen.dart';
 import 'package:movie_mvvm/screens/movies_screen.dart';
+import 'package:movie_mvvm/screens/splash_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -17,7 +18,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Movies App',
       theme: AppThemeData.lightTheme,
-      home: const MovieDetailsScreen(),
+      home: SplashScreen(),
     );
   }
 }

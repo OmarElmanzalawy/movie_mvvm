@@ -12,4 +12,8 @@ class MovieGenre {
     );
 
   }
+  @override
+  String toString() {
+    return 'MovieGenre(id: $id, name: $name)';
+  }
 }

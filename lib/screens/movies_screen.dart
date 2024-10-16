@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_mvvm/constants/app_constants.dart';
 import 'package:movie_mvvm/constants/app_icons.dart';
 import 'package:movie_mvvm/models/movie_model.dart';
+import 'package:movie_mvvm/repository/movies_repo.dart';
 import 'package:movie_mvvm/service/api_service.dart';
 import 'package:movie_mvvm/service/init_getit.dart';
 import 'package:movie_mvvm/service/navigation_service.dart';
@@ -26,9 +27,7 @@ class MoviesScreen extends StatelessWidget {
               color: Colors.red,
             ),
             IconButton(onPressed: () async{
-              //final List<MovieModel> movies= await getIt<ApiService>().fetchGenres();
-              await getIt<ApiService>().fetchGenres();
-              //print('moveies: ${movies.toString()}');
+              await getIt<MoviesRepo>().fetchMovies();
             },
              icon: const Icon(AppIcons.darkMode)),
           ],

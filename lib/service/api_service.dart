@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:movie_mvvm/constants/api_constants.dart';
+import 'package:movie_mvvm/models/movie_genre.dart';
 import 'package:movie_mvvm/models/movie_model.dart';
 
 class ApiService {
@@ -22,7 +23,7 @@ class ApiService {
   }
 
   //TODO THIS IS WHERE YOU LEFT OFF, COMPLETE THIS FUNCTION TO FETCH GENRES
-  Future fetchGenres()async{
+  Future<List<MovieGenre>> fetchGenres()async{
     final url = Uri.parse(
       '${ApiConstants.baseUrl}/genre/movie/list?language=en',
     );
@@ -30,7 +31,9 @@ class ApiService {
 
     if(response.statusCode == 200){
       final data = jsonDecode(response.body);
-      print('data: $data');
+      final List<MovieGenre> result = List.from((data['genres'].map)((element) => MovieGenre.fromJson(element)));
+      print('Movie Genre: $result');
+      return result;
     }
     else{ throw Exception('Failed to load movies: ${response.statusCode}');}
 

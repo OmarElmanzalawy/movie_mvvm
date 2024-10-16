@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class MovieModel{
 
  bool? adult;
@@ -66,5 +68,10 @@ class MovieModel{
     data['vote_average'] = voteAverage;
     data['vote_count'] = voteCount;
     return data;
+  }
+  
+  @override
+  String toString() {
+    return 'MovieModel(adult: $adult,backdropPath: $backdropPath,genreIds: $genreIds, id: $id, originalLanguage: $originalLanguage, originalTitle: $originalTitle,overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, title: $title, video: $video )';
   }
 }

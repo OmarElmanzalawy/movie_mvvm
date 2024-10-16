@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_mvvm/constants/app_theme_data.dart';
 import 'package:movie_mvvm/screens/favorite_screen.dart';
 import 'package:movie_mvvm/screens/movie_details_screen.dart';
@@ -7,8 +8,9 @@ import 'package:movie_mvvm/screens/splash_screen.dart';
 import 'package:movie_mvvm/service/init_getit.dart';
 import 'package:movie_mvvm/service/navigation_service.dart';
 
-void main() {
+void main() async{
   setupLocator();
+  await dotenv.load(fileName: 'assets/.env');
   runApp(const MainApp());
 }
 

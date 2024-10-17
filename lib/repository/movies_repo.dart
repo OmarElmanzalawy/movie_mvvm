@@ -7,8 +7,8 @@ class MoviesRepo {
   final ApiService _apiService;
   MoviesRepo(this._apiService);
 
-  Future<List<MovieModel>> fetchMovies()async{
-    return await _apiService.fetchMovies();
+  Future<List<MovieModel>> fetchMovies({int? page})async{
+    return await _apiService.fetchMovies(page: page);
   }
 
   Future<List<MovieGenre>> fetchGenres()async{

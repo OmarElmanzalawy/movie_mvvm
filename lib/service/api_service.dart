@@ -7,16 +7,16 @@ import 'package:movie_mvvm/models/movie_genre.dart';
 import 'package:movie_mvvm/models/movie_model.dart';
 
 class ApiService {
-  Future<List<MovieModel>> fetchMovies()async{
+  Future<List<MovieModel>> fetchMovies({int? page})async{
     final url = Uri.parse(
-      '${ApiConstants.baseUrl}/movie/popular?language=en-US&page=1'
+      '${ApiConstants.baseUrl}/movie/popular?language=en-US&page=${page??1}'
     );
     final response = await http.get(url,headers: ApiConstants.headers);
     if(response.statusCode == 200){
       final data = jsonDecode(response.body);
       //print('data: $data');
       final List<MovieModel> result=  List.from((data['results'].map)((element)=> MovieModel.fromJson(element)));
-      print(result);
+      //print(result);
       return result;
     }
     else{ throw Exception('Failed to load movies: ${response.statusCode}');}

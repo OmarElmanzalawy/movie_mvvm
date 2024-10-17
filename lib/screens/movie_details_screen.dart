@@ -19,11 +19,14 @@ class MovieDetailsScreen extends StatelessWidget {
         child: Stack(
           children: [
             //Image
-            SizedBox(
-              height: size.height * 0.45,
-              width: double.infinity,
-              child:  CachedImageWidget(
-                url: '${ApiConstants.backdropImageBaseUrl}${movieModel.backdropPath}' ?? AppConstants.bladeRunner,
+            Hero(
+              tag: '${movieModel.id}',
+              child: SizedBox(
+                height: size.height * 0.45,
+                width: double.infinity,
+                child:  CachedImageWidget(
+                  url: '${ApiConstants.backdropImageBaseUrl}${movieModel.backdropPath}' ?? AppConstants.bladeRunner,
+                ),
               ),
             ),
             SingleChildScrollView(

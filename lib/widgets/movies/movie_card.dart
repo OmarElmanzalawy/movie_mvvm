@@ -13,16 +13,16 @@ import 'package:movie_mvvm/widgets/movies/genre_list.dart';
 class MovieCard extends StatelessWidget {
 
   
-  final MovieModel movieModel;
+  //final MovieModel movieModel;
 
-  const MovieCard({super.key, required this.movieModel});
+  const MovieCard({super.key,});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(12),
       onTap: (){
-        getIt<NavigationService>().navigate( MovieDetailsScreen(movieModel: movieModel,));
+        getIt<NavigationService>().navigate( MovieDetailsScreen());
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -30,15 +30,13 @@ class MovieCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Hero(
-                tag: '${movieModel.id}',
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: CachedImageWidget(
-                    url: "${ApiConstants.backdropImageBaseUrl}${movieModel.backdropPath}",
-                    width: 90,
-                    height: 130,
-                  ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: CachedImageWidget(
+                  url: AppConstants.bladeRunner,
+                  //"${ApiConstants.backdropImageBaseUrl}${movieModel.backdropPath}",
+                  width: 90,
+                  height: 130,
                 ),
               ),
               Expanded(
@@ -48,7 +46,8 @@ class MovieCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        movieModel.title ?? 'No Title',
+                        // movieModel.title ?? 'No Title',
+                        'Title',
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                       ),
                       SizedBox(height: 10,),
@@ -59,11 +58,13 @@ class MovieCard extends StatelessWidget {
                             color: Colors.amber,
                           ),
                           SizedBox(width: 5,),
-                          Text('${movieModel.voteAverage ?? 7.5}/10'),
+                          Text('7/10'/*'${movieModel.voteAverage!.toStringAsFixed(1)}/10'*/),
                         ],
                       ),
                       //SizedBox(height: 25,),
-                      GenreList(movieModel: movieModel,),
+                      GenreList(
+                        // movieModel: movieModel,
+                        ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         mainAxisSize: MainAxisSize.max,
@@ -75,12 +76,14 @@ class MovieCard extends StatelessWidget {
                             size: 20,
                           ),
                           SizedBox(width: 5,),
-                          Text(movieModel.releaseDate ?? 'Release Date',style: TextStyle(
+                          Text('movieModel.releaseDate' ?? 'Release Date',style: TextStyle(
                             fontWeight: FontWeight.normal,
                             color: Colors.black54
                           ),),
                           const Spacer(),
-                           FavoriteBtnWidget(movieModel: movieModel,),
+                           FavoriteBtnWidget(
+                            //movieModel: movieModel,
+                            ),
                         ],
                       )
                     ],

@@ -1,57 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:movie_mvvm/repository/movies_repo.dart';
-import 'package:movie_mvvm/screens/movies_screen.dart';
-import 'package:movie_mvvm/service/init_getit.dart';
-import 'package:movie_mvvm/service/navigation_service.dart';
 import 'package:movie_mvvm/widgets/movies/error_widget.dart';
-import 'package:movie_mvvm/widgets/movies/movie_card.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
-  SplashScreen({super.key});
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  bool _isLoading = true;
-  String _errorMessage = '';
-  final _movieRepo = getIt<MoviesRepo>();
-
-  
-
-  Future<void>_loadData()async{
-    setState(() {
-      _isLoading = true;
-      _errorMessage = '';
-    });
-    try{
-      await _movieRepo.fetchGenres();
-      await getIt<NavigationService>().navigateReplace(const MoviesScreen());
-    }
-    catch (e){
-      setState(() {
-        _errorMessage = e.toString();
-      });
-    }
-    finally{
-      setState(() {
-        _isLoading = false;
-      });
-    }
-
-  }
-
-  @override
-  void initState() {
-    _loadData();
-    super.initState();
-  }
-  @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:_isLoading ?   
+      body:true ?
       Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ],
         ),
       )
-      : MyErrorWidget(errorText: 'Error Text',onPressed: (){_loadData;},),
+      : MyErrorWidget(errorText: 'Error Text',onPressed: (){},),
     );
   }
 }

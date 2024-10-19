@@ -32,7 +32,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Movies App',
       theme: AppThemeData.lightTheme,
-      home: SplashScreen(),
+      home: const MoviesScreen(),
     );
   }
 }

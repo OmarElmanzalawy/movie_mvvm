@@ -78,7 +78,7 @@ class MovieCard extends StatelessWidget {
                           SizedBox(width: 5,),
                           Text('movieModel.releaseDate' ?? 'Release Date',style: TextStyle(
                             fontWeight: FontWeight.normal,
-                            color: Colors.black54
+                            //color: Colors.black54
                           ),),
                           const Spacer(),
                            FavoriteBtnWidget(

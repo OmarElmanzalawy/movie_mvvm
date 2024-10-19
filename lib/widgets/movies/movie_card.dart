@@ -63,7 +63,7 @@ class MovieCard extends StatelessWidget {
                         ],
                       ),
                       //SizedBox(height: 25,),
-                      GenreList(),
+                      GenreList(movieModel: movieModel,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         mainAxisSize: MainAxisSize.max,
@@ -80,7 +80,7 @@ class MovieCard extends StatelessWidget {
                             color: Colors.black54
                           ),),
                           const Spacer(),
-                          const FavoriteBtnWidget(),
+                           FavoriteBtnWidget(movieModel: movieModel,),
                         ],
                       )
                     ],

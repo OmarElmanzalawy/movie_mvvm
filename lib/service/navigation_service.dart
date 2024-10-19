@@ -27,7 +27,6 @@ class NavigationService{
 
   void showSnackbar({SnackBar? customSnackBar, String? text}){
 
-    
     final context = navigationKey.currentContext!;
     //Checks if there is already a snackbar shown and closes it
     ScaffoldMessenger.of(context).hideCurrentMaterialBanner();

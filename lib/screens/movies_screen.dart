@@ -3,6 +3,7 @@ import 'package:movie_mvvm/constants/app_constants.dart';
 import 'package:movie_mvvm/constants/app_icons.dart';
 import 'package:movie_mvvm/models/movie_model.dart';
 import 'package:movie_mvvm/repository/movies_repo.dart';
+import 'package:movie_mvvm/screens/favorite_screen.dart';
 import 'package:movie_mvvm/service/api_service.dart';
 import 'package:movie_mvvm/service/init_getit.dart';
 import 'package:movie_mvvm/service/navigation_service.dart';
@@ -69,7 +70,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
           actions: [
             IconButton(
               onPressed: () {
-                getIt<NavigationService>().showSnackbar();
+                getIt<NavigationService>().navigate(const FavoriteScreen());
               },
               icon: const Icon(AppIcons.favoriteRounded),
               color: Colors.red,

@@ -7,9 +7,9 @@ import 'package:movie_mvvm/widgets/movies/favorite_btn.dart';
 import 'package:movie_mvvm/widgets/movies/genre_list.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
-  const MovieDetailsScreen({super.key, });
+  const MovieDetailsScreen({super.key, required this.movieModel, });
 
-  // final MovieModel movieModel;
+  final MovieModel movieModel;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +23,7 @@ class MovieDetailsScreen extends StatelessWidget {
               height: size.height * 0.45,
               width: double.infinity,
               child:  CachedImageWidget(
-                url: AppConstants.bladeRunner
-                //'${ApiConstants.backdropImageBaseUrl}${movieModel.backdropPath}' ?? AppConstants.bladeRunner,
+                url: '${ApiConstants.backdropImageBaseUrl}${movieModel.backdropPath}' ?? AppConstants.bladeRunner,
               ),
             ),
             SingleChildScrollView(
@@ -48,7 +47,7 @@ class MovieDetailsScreen extends StatelessWidget {
                               children: [
                                 const SizedBox(height: 25),
                                  Text(
-                                  'movieModel.title'?? 'Not found',
+                                  movieModel.title?? 'Not found',
                                   maxLines: 2,
                                   style: TextStyle(
                                     // color: Theme.of(context).textSelectionColor,
@@ -69,25 +68,22 @@ class MovieDetailsScreen extends StatelessWidget {
                                     ),
                                     SizedBox(width: 5),
                                     Text(
-                                      '6/10'
-                                      // "${movieModel.voteAverage!.toStringAsFixed(1)}/10"
+                                        "${movieModel.voteAverage!.toStringAsFixed(1)}/10"
                                       ),
                                     Spacer(),
                                     Text(
-                                      'release date',
-                                      // movieModel.releaseDate ?? 'Release Date',
+                                      movieModel.releaseDate ?? 'Release Date',
                                       style: TextStyle(color: Colors.grey),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 10),
                                  GenreList(
-                                  //movieModel: movieModel,
+                                  movieModel: movieModel,
                                   ),
                                 const SizedBox(height: 15),
                                 Text(
-                                  'description'*20,
-                                  // movieModel.overview ?? 'No Description found',
+                                  movieModel.overview ?? 'No Description found',
                                   textAlign: TextAlign.justify,
                                   style: const TextStyle(
                                     fontSize: 18.0,

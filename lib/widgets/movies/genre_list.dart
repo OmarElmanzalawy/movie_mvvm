@@ -5,8 +5,8 @@ import 'package:movie_mvvm/models/movie_model.dart';
 import 'package:movie_mvvm/utils/genre_utils.dart';
 
 class GenreList extends StatelessWidget {
-  const GenreList({super.key,});
-  // final MovieModel movieModel;
+  const GenreList({super.key, required this.movieModel,});
+  final MovieModel movieModel;
   @override
   Widget build(BuildContext context) {
     List<MovieGenre> movieGenre =[];

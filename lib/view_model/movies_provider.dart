@@ -6,10 +6,16 @@ import 'package:movie_mvvm/view_model/moives_state.dart';
 
 final moviesProvider = StateNotifierProvider<MoviesProvider,MoivesState>((ref) => MoviesProvider());
 
+final currentMovie = Provider.family<MovieModel,int>((ref, index) {
+  final movieState = ref.watch(moviesProvider);
+  return movieState.moviesList[index];
+},);
+
 class MoviesProvider extends StateNotifier<MoivesState>{
   MoviesProvider():super(MoivesState());
   final MoviesRepo _moviesRepo = getIt<MoviesRepo>();
   Future<void> getMovies()async{
+    if(state.isLoading)return;
     state = state.copyWith(isLoading: true);
     try{
       if(state.genreList.isEmpty){

@@ -4,6 +4,8 @@ import 'package:movie_mvvm/repository/movies_repo.dart';
 import 'package:movie_mvvm/service/init_getit.dart';
 import 'package:movie_mvvm/view_model/moives_state.dart';
 
+final moviesProvider = StateNotifierProvider<MoviesProvider,MoivesState>((ref) => MoviesProvider());
+
 class MoviesProvider extends StateNotifier<MoivesState>{
   MoviesProvider():super(MoivesState());
   final MoviesRepo _moviesRepo = getIt<MoviesRepo>();

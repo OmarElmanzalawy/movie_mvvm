@@ -9,12 +9,12 @@ import 'package:movie_mvvm/view_model/theme_provider.dart';
 import 'package:movie_mvvm/widgets/movies/movie_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MoviesScreen extends ConsumerWidget {
+class MoviesScreen extends StatelessWidget {
   const MoviesScreen({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-    final themeMode = ref.watch(themeProvider);
+  Widget build(BuildContext context) {
+    
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -27,10 +27,14 @@ class MoviesScreen extends ConsumerWidget {
               icon: const Icon(AppIcons.favoriteRounded),
               color: Colors.red,
             ),
-            IconButton(onPressed: () async{
-              await ref.read(themeProvider.notifier).toggleTheme();
-            },
-             icon: Icon(themeMode == ThemeEnums.dark ? AppIcons.lightMode : AppIcons.darkMode)  ),
+            Consumer(builder: (context,ref,child){
+              final themeMode = ref.watch(themeProvider);
+              return IconButton(onPressed: () async{
+                await ref.read(themeProvider.notifier).toggleTheme();
+              },
+               icon: Icon(themeMode == ThemeEnums.dark ? AppIcons.lightMode : AppIcons.darkMode));
+            }
+            ),
           ],
         ),
         body: ListView.builder(

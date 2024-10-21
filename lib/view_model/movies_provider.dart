@@ -27,7 +27,7 @@ class MoviesProvider extends StateNotifier<MoivesState>{
         moviesList: [...state.moviesList,...movies],
         currentPage: state.currentPage+1,
         fetchMoviesError: '',
-        isLoading: false
+        isLoading: false,
         );
     }
     catch(e){

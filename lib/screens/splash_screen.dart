@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_mvvm/screens/movies_screen.dart';
 import 'package:movie_mvvm/service/init_getit.dart';
 import 'package:movie_mvvm/service/navigation_service.dart';
+import 'package:movie_mvvm/view_model/favorites_provider.dart';
 import 'package:movie_mvvm/view_model/movies_provider.dart';
 import 'package:movie_mvvm/widgets/movies/error_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ final initializationProvider = FutureProvider.autoDispose((ref) async {
   ref.keepAlive();
   await Future.microtask(() async {
     await ref.read(moviesProvider.notifier).getMovies();
+    await ref.read(favoritesProvider.notifier).loadFavorites();
     //await Future.delayed(Duration(seconds: 3), (){});
   });
 });
@@ -34,7 +36,7 @@ class SplashScreen extends ConsumerWidget {
         return SizedBox.shrink();
       }, error: (error, _) {
         return MyErrorWidget(
-          errorText: 'Error Text',
+          errorText: 'Error ${error.toString()}',
           onPressed: () {
             ref.refresh(initializationProvider);
           },

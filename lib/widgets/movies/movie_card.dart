@@ -30,12 +30,15 @@ class MovieCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: CachedImageWidget(
-                  url: "${ApiConstants.backdropImageBaseUrl}${movieModel.backdropPath}",
-                  width: 90,
-                  height: 130,
+              Hero(
+                tag: '${movieModel.id}',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: CachedImageWidget(
+                    url: "${ApiConstants.backdropImageBaseUrl}${movieModel.backdropPath}",
+                    width: 90,
+                    height: 130,
+                  ),
                 ),
               ),
               Expanded(
@@ -81,7 +84,7 @@ class MovieCard extends StatelessWidget {
                           ),),
                           const Spacer(),
                            FavoriteBtnWidget(
-                            //movieModel: movieModel,
+                            movieModel: movieModel,
                             ),
                         ],
                       )

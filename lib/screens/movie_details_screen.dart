@@ -22,8 +22,11 @@ class MovieDetailsScreen extends StatelessWidget {
             SizedBox(
               height: size.height * 0.45,
               width: double.infinity,
-              child:  CachedImageWidget(
-                url: '${ApiConstants.backdropImageBaseUrl}${movieModel.backdropPath}' ?? AppConstants.bladeRunner,
+              child:  Hero(
+                tag: '${movieModel.id}',
+                child: CachedImageWidget(
+                  url: '${ApiConstants.backdropImageBaseUrl}${movieModel.backdropPath}' ?? AppConstants.bladeRunner,
+                ),
               ),
             ),
             SingleChildScrollView(
@@ -32,7 +35,6 @@ class MovieDetailsScreen extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: size.height * 0.4,
-                    // child: Container(color: Colors.red,),
                   ),
                   Stack(
                     children: [
@@ -104,7 +106,7 @@ class MovieDetailsScreen extends StatelessWidget {
                           child:  Padding(
                             padding: EdgeInsets.all(6.0),
                             child: FavoriteBtnWidget(
-                              //movieModel: movieModel,
+                              movieModel: movieModel,
                               ),
                           ),
                         ),

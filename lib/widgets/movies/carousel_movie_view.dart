@@ -20,7 +20,7 @@ class CarouselMovieView extends StatelessWidget {
           ),
           ),
         ),
-
+    
         Stack(
                     children: [
                       Container(

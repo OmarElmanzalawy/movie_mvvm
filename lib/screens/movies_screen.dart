@@ -18,8 +18,12 @@ class MoviesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
-          appBar: AppBar(
-    actions: [
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                expandedHeight: 50,
+                pinned: true,
+                actions: [
       IconButton(
         onPressed: () {
           getIt<NavigationService>().navigate(const FavoriteScreen());
@@ -38,10 +42,8 @@ class MoviesScreen extends ConsumerWidget {
                 : AppIcons.darkMode));
       }),
     ],
-          ),
-          body: Column(
-            children: [
-              CarouselMovieView(movieList: ref.read(moviesProvider).moviesList),
+              ),
+              SliverToBoxAdapter(child: CarouselMovieView(movieList: ref.read(moviesProvider).moviesList)),
               Expanded(
                 child: Consumer(
                     builder: (context, ref, child) {
@@ -65,11 +67,15 @@ class MoviesScreen extends ConsumerWidget {
                 }
                 return true;
                         },
-                        child: ListView.builder(
-                  itemCount: movieState.moviesList.length,
-                  itemBuilder: (context, index) {
+                        child: SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                  childCount: movieState.moviesList.length,
+                   (context, index) {
+                    //Removed first 5 movies from list
+                    //TODO FIX INDEXING BUG
                     return MovieCard(movieModel: ref.read(currentMovie(index+5)),);
                   }),
+                        )
                       );
                     },
                 ),

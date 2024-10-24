@@ -10,7 +10,7 @@ class FavoriteScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     final favoritesProviderList = ref.watch(favoritesProvider).favoritesList;
-    print(favoritesProviderList.length);
+    //print(favoritesProviderList.length);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

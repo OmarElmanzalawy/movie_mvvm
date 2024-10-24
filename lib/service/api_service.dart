@@ -32,7 +32,7 @@ class ApiService {
     if(response.statusCode == 200){
       final data = jsonDecode(response.body);
       final List<MovieGenre> result = List.from((data['genres'].map)((element) => MovieGenre.fromJson(element)));
-      print('Movie Genre: $result');
+      //print('Movie Genre: $result');
       return result;
     }
     else{ throw Exception('Failed to load movies: ${response.statusCode}');}

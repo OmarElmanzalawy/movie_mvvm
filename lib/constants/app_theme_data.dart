@@ -13,7 +13,7 @@ class AppThemeData{
 
     static final ThemeData darkTheme = ThemeData.dark().copyWith(
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.grey.shade800,
+      backgroundColor: Color(0xff121212),
       foregroundColor: Colors.white,
       elevation: 1,
     ),

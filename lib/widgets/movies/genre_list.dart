@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_mvvm/constants/app_constants.dart';
 import 'package:movie_mvvm/models/movie_genre.dart';
 import 'package:movie_mvvm/models/movie_model.dart';
 import 'package:movie_mvvm/utils/genre_utils.dart';
 
-class GenreList extends StatelessWidget {
+class GenreList extends ConsumerWidget {
   const GenreList({super.key, required this.movieModel,});
   final MovieModel movieModel;
   @override
-  Widget build(BuildContext context) {
-    List<MovieGenre> movieGenre =[];
-        // GenreUtils.movieGenreNames(movieModel.genreIds!);
+  Widget build(BuildContext context,WidgetRef ref) {
+    List<MovieGenre> movieGenre =
+      GenreUtils.movieGenreNames(movieModel.genreIds!,ref);
     return Wrap(
         children: List.generate(
             movieGenre.length,

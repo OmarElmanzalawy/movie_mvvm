@@ -15,60 +15,59 @@ class MoviesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        title: const Text('Popular Movies'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              getIt<NavigationService>().navigate(const FavoriteScreen());
-            },
-            icon: const Icon(AppIcons.favoriteRounded),
-            color: Colors.red,
-          ),
-          Consumer(builder: (context, ref, child) {
-            final themeMode = ref.watch(themeProvider);
-            return IconButton(
-                onPressed: () async {
-                  await ref.read(themeProvider.notifier).toggleTheme();
-                },
-                icon: Icon(themeMode == ThemeEnums.dark
-                    ? AppIcons.lightMode
-                    : AppIcons.darkMode));
-          }),
-        ],
-      ),
-      body: Consumer(
-        builder: (context, ref, child) {
-          final movieState = ref.watch(moviesProvider);
-          //final currentMovie = ref.read(currentMovie)
-          if (movieState.isLoading && movieState.moviesList.isEmpty) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          } else if (movieState.fetchMoviesError.isNotEmpty) {
-            return Center(
-              child: Text(movieState.fetchMoviesError),
-            );
-          }
-          return NotificationListener<ScrollNotification>(
-            onNotification: (ScrollNotification scrollInfo) {
-              if (scrollInfo.metrics.pixels ==
-                      scrollInfo.metrics.maxScrollExtent &&
-                  !movieState.isLoading) {
-                ref.read(moviesProvider.notifier).getMovies();
-              }
-              return true;
-            },
-            child: ListView.builder(
-                itemCount: movieState.moviesList.length,
-                itemBuilder: (context, index) {
-                  return MovieCard(movieModel: ref.read(currentMovie(index)),);
-                }),
-          );
+    return Scaffold(
+          appBar: AppBar(
+    title: const Text('Popular Movies'),
+    actions: [
+      IconButton(
+        onPressed: () {
+          getIt<NavigationService>().navigate(const FavoriteScreen());
         },
+        icon: const Icon(AppIcons.favoriteRounded),
+        color: Colors.red,
       ),
-    ));
+      Consumer(builder: (context, ref, child) {
+        final themeMode = ref.watch(themeProvider);
+        return IconButton(
+            onPressed: () async {
+              await ref.read(themeProvider.notifier).toggleTheme();
+            },
+            icon: Icon(themeMode == ThemeEnums.dark
+                ? AppIcons.lightMode
+                : AppIcons.darkMode));
+      }),
+    ],
+          ),
+          body: Consumer(
+    builder: (context, ref, child) {
+      final movieState = ref.watch(moviesProvider);
+      //final currentMovie = ref.read(currentMovie)
+      if (movieState.isLoading && movieState.moviesList.isEmpty) {
+        return const Center(
+          child: CircularProgressIndicator.adaptive(),
+        );
+      } else if (movieState.fetchMoviesError.isNotEmpty) {
+        return Center(
+          child: Text(movieState.fetchMoviesError),
+        );
+      }
+      return NotificationListener<ScrollNotification>(
+        onNotification: (ScrollNotification scrollInfo) {
+          if (scrollInfo.metrics.pixels ==
+                  scrollInfo.metrics.maxScrollExtent &&
+              !movieState.isLoading) {
+            ref.read(moviesProvider.notifier).getMovies();
+          }
+          return true;
+        },
+        child: ListView.builder(
+            itemCount: movieState.moviesList.length,
+            itemBuilder: (context, index) {
+              return MovieCard(movieModel: ref.read(currentMovie(index)),);
+            }),
+      );
+    },
+          ),
+        );
   }
 }

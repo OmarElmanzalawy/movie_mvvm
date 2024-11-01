@@ -44,41 +44,40 @@ class MoviesScreen extends ConsumerWidget {
     ],
               ),
               SliverToBoxAdapter(child: CarouselMovieView(movieList: ref.read(moviesProvider).moviesList)),
-              Expanded(
-                child: Consumer(
-                    builder: (context, ref, child) {
-                      final movieState = ref.watch(moviesProvider);
-                      //final currentMovie = ref.read(currentMovie)
-                      if (movieState.isLoading && movieState.moviesList.isEmpty) {
-                        return const Center(
-                child: CircularProgressIndicator.adaptive(),
-                        );
-                      } else if (movieState.fetchMoviesError.isNotEmpty) {
-                        return Center(
-                child: Text(movieState.fetchMoviesError),
-                        );
-                      }
-                      return NotificationListener<ScrollNotification>(
-                        onNotification: (ScrollNotification scrollInfo) {
-                if (scrollInfo.metrics.pixels ==
-                        scrollInfo.metrics.maxScrollExtent &&
-                    !movieState.isLoading) {
-                  ref.read(moviesProvider.notifier).getMovies();
-                }
-                return true;
-                        },
-                        child: SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                  childCount: movieState.moviesList.length,
-                   (context, index) {
-                    //Removed first 5 movies from list
-                    //TODO FIX INDEXING BUG
-                    return MovieCard(movieModel: ref.read(currentMovie(index+5)),);
-                  }),
-                        )
+              Consumer(
+                  builder: (context, ref, child) {
+                    final movieState = ref.watch(moviesProvider);
+                    //final currentMovie = ref.read(currentMovie)
+                    if (movieState.isLoading && movieState.moviesList.isEmpty) {
+                      return const Center(
+              child: CircularProgressIndicator.adaptive(),
                       );
-                    },
-                ),
+                    } else if (movieState.fetchMoviesError.isNotEmpty) {
+                      return Center(
+              child: Text(movieState.fetchMoviesError),
+                      );
+                    }
+                    return NotificationListener<ScrollNotification>(
+                      onNotification: (ScrollNotification scrollInfo) {
+              if (scrollInfo.metrics.pixels ==
+                      scrollInfo.metrics.maxScrollExtent &&
+                  !movieState.isLoading) {
+                ref.read(moviesProvider.notifier).getMovies();
+              }
+              return true;
+                      },
+                      child: SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                childCount: movieState.moviesList.length-5,
+                 (context, index) {
+                  //Removed first 5 movies from list
+                  //TODO FIX INDEXING BUG
+                  return MovieCard(movieModel: ref.read(currentMovie(index+5)),);
+                    
+                }),
+                      ),
+                    );
+                  },
               ),
             ],
           ),

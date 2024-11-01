@@ -35,4 +35,11 @@ class MoviesProvider extends StateNotifier<MoivesState>{
       rethrow;
     }
   }
+  Future<void> removeCarouselMovies()async{
+
+    final currentList = state.moviesList;
+    currentList.removeRange(0, 5);
+    state = state.copyWith(moviesList: currentList);
+
+  }
 }
